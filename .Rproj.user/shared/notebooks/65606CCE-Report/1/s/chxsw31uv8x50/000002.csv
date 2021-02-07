@@ -1,0 +1,49 @@
+"0","```r
+# Crude rate
+crude_rate <- cancer_incidence_data %>% 
+  filter(hb_name == \"NHS Borders\") %>% 
+  filter(cancer_site == \"All cancer types\") %>%
+  filter(sex == \"All\") %>% 
+  mutate(measure = \"Crude rate\",
+         rate = crude_rate) %>% 
+  select(hb_name, year, measure, rate) 
+# European age-standardised rate
+european_standardised_rate <- cancer_incidence_data %>% 
+  filter(hb_name == \"NHS Borders\") %>% 
+  filter(cancer_site == \"All cancer types\") %>%
+  filter(sex == \"All\") %>% 
+  mutate(measure = \"European age-standardised rate\",
+         rate = easr) %>% 
+  select(hb_name, year, measure, rate)  
+
+# put these two datasets together
+compare_rates <- 
+bind_rows(crude_rate, european_standardised_rate)
+
+# drop intermediate tables
+rm(crude_rate, european_standardised_rate)
+
+ compare_rates %>%  
+  ggplot() +
+  aes(x = year, y = rate, group  = measure, colour = measure  ) +
+  geom_line(size  = 2) +
+  theme_minimal() +
+  scale_x_continuous(breaks = (min(cancer_incidence_data$year):max(cancer_incidence_data$year))) +
+  scale_y_continuous(labels = scales::comma) +
+  theme(axis.text.x = element_text(angle=45,hjust=1)) +
+   theme(legend.position=\"bottom\") +
+     scale_colour_manual(
+    values = c(
+      \"Crude rate\" = \"#00A9CE\",
+      \"European age-standardised rate\" = \"#003087\"
+     )
+    ) +
+  labs(
+    title = \"Crude rate vs European age-standardised rate\",
+    subtitle = \"NHS Borders 1994-2018 \n\",
+    x = \"\n Year\",
+    y = \"Number of cases all cancers per 100,000 \n\",
+    colour = \"\"
+  )
+
+```"

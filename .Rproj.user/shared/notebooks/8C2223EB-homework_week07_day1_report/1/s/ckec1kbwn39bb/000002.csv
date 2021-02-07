@@ -1,0 +1,8 @@
+"0","nyc_summ_gender <- tibble( nyc_bikes_df %>%"
+"0","  filter(gender!= ""Unknown"") %>% "
+"0","  group_by(gender) %>% "
+"0","  summarise(number_of_hires = n()) )"
+"0",""
+"0","nyc_summ_gender <- nyc_summ_gender %>% "
+"0","  group_by(gender) %>% "
+"0","  summarise(number_of_hires = sum(number_of_hires))"

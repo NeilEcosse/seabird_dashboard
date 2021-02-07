@@ -1,0 +1,243 @@
+---
+output:
+  html_document:
+    code_folding: hide
+  html_notebook: default
+  pdf_document: default
+---
+```{r, warning = F, message = F}
+library(tidyverse)
+library(janitor)
+library(here)
+```
+
+```{r, warning = F, message = F}
+cancer_incidence_data <- 
+ read_csv(here("data_clean/cancer_incidence_data.csv"))
+
+population_estimates <- 
+ read_csv(here("data_clean/population_estimates.csv"))
+
+data_dictionary <- read_csv(here("data_raw/data_dictionary.csv")) 
+```
+
+
+
+# <span style="color:#005EB8">Incidence of cancer in the NHS Borders area</span>
+
+## <span style="color:#005EB8">Overview</span>
+
+This report uses publicly available data to give a high-level insight into the incidence of cancer in the NHS Borders area.
+
+It looks at the following questions:
+
+* How has the population changed over time?
+
+* How has the number of cancer cases changed over time?
+
+* What types of cancer are most prevalent in the region?
+
+* What is the impact of the age of our residents?
+
+
+
+The sources of figures used in the report are listed in the *references* section
+
+
+## <span style="color:#005EB8">How has the population changed over time?</span>
+
+The graph below for the period 1994-2018 shows how the population has increased - note that there was a particularly steep rise between 1999 and 2008.
+
+```{r, warning = F, message = F}
+population_estimates %>% 
+  filter(area_name == "Borders") %>% 
+  filter(gender == "All") %>%
+  filter(year >= 1994 & year <= 2018) %>% 
+  group_by(area_name, year) %>% 
+  summarise(population_estimate = sum(population_estimate)) %>% 
+  ggplot() +
+  aes(x = year, y = population_estimate) +
+  # NHS colours: https://www.england.nhs.uk/nhsidentity/identity-guidelines/colours/
+  geom_line(colour = "#005EB8", size  = 2) +
+  theme_minimal() +
+  scale_x_continuous(breaks = 1994:2018) +
+  scale_y_continuous(labels = scales::comma) +
+  theme(axis.text.x = element_text(angle=45,hjust=1)) +
+    labs(
+    title = "Mid-year population estimate over time",
+    subtitle = "NHS Borders 1994-2018 \n",
+    x = "\n Year",
+    y = "Population estimate \n"
+  )
+```
+
+## <span style="color:#005EB8">How has the number of cancer cases changed over time?</span>
+
+This graph shows how cancer cases have risen in the same period:
+
+```{r, warning = F, message = F}
+cancer_incidence_data %>% 
+  filter(hb_name == "NHS Borders") %>% 
+  filter(cancer_site == "All cancer types") %>%
+  filter(sex == "All") %>% 
+  group_by(hb_name, year) %>% 
+  summarise(total_incidences_all_ages = sum(incidences_all_ages)) %>% 
+  ggplot() +
+  aes(x = year, y = total_incidences_all_ages) +
+  # NHS colours: https://www.england.nhs.uk/nhsidentity/identity-guidelines/colours/
+  geom_line(colour = "#005EB8", size  = 2) +
+  theme_minimal() +
+  scale_x_continuous(breaks = (min(cancer_incidence_data$year):max(cancer_incidence_data$year))) +
+  scale_y_continuous(labels = scales::comma) +
+  theme(axis.text.x = element_text(angle=45,hjust=1)) +
+  labs(
+    title = "Incidence of all cancer types over time",
+    subtitle = "NHS Borders 1994-2018 \n",
+    x = "\n Year",
+    y = "Number of cases \n"
+  )
+```
+
+## <span style="color:#005EB8">What types of cancer are most prevalent in the region?</span>
+
+The graph below gives a summary of the most common types of cancer: for the period 1994-2018, it shows totals for the cancer sites where at least 500 cases were recorded (13 of the 41 cancer types recorded).
+
+```{r, warning = F, message = F}
+cancer_incidence_data %>% 
+  filter(hb_name == "NHS Borders") %>% 
+  filter(cancer_site != "All cancer types") %>% 
+  filter(sex == "All") %>%
+  group_by(hb_name, cancer_site) %>% 
+  summarise(total_incidences_all_ages = sum(incidences_all_ages)) %>% 
+  filter(total_incidences_all_ages >=500) %>% 
+  ggplot() +
+  aes(x = reorder(cancer_site, -total_incidences_all_ages), y = total_incidences_all_ages) +
+  # NHS colours: https://www.england.nhs.uk/nhsidentity/identity-guidelines/colours/
+  geom_col(fill = "#005EB8") +
+  theme_minimal() +
+  scale_y_continuous(labels = scales::comma) +
+  theme(axis.text.x = element_text(angle=45,hjust=1)) +
+    labs(
+    title = "Number of cases by cancer site",
+    subtitle = "NHS Borders 1994-2018 \n",
+    x = "\n Cancer site",
+    y = "Number of cases \n",
+    colour = ""
+  )
+```
+
+## <span style="color:#005EB8">What is the impact of the age of our residents?</span>
+
+The relative proportion of older people in The Borders is projected to rise, which will have an impact on the types and capacity of services which the NHS will need to offer, including cancer services.
+
+To illustrate this changing demographic, the graph of cancer cases below shows:
+
+*  <span style="color:#00A9CE">**The crude rate:**</span> This is calculated as the number of cases per 100,000 people.
+
+* <span style="color:#003087">**The European age-standardised rate:**</span> This is the rate that would have been found if the population of The Borders had the same age-composition (proportion of total population in each five year age class) as a hypothetical European population, known as the *2013 European Standard Population*.
+
+**The age-standardised rate should not be affected by any changes in the distribution of the population by age.**
+
+What you can see in this graph is that from 2009 onward the crude rate exceeds the age-standardised rate - this higher number of cancer cases gives an indication that the actual population of The Borders is older than the standardised version.
+
+There are now proportionally more people in older age groups, who are more likely to develop cancer; estimates published by National Records of Scotland *(see references section below)* anticipate that this trend will continue, so cancer services in The Borders will need to increase provision to treat and support these patients.
+
+```{r, warning = F, message = F}
+# Crude rate
+crude_rate <- cancer_incidence_data %>% 
+  filter(hb_name == "NHS Borders") %>% 
+  filter(cancer_site == "All cancer types") %>%
+  filter(sex == "All") %>% 
+  mutate(measure = "Crude rate",
+         rate = crude_rate) %>% 
+  select(hb_name, year, measure, rate) 
+
+# European age-standardised rate
+european_standardised_rate <- cancer_incidence_data %>% 
+  filter(hb_name == "NHS Borders") %>% 
+  filter(cancer_site == "All cancer types") %>%
+  filter(sex == "All") %>% 
+  mutate(measure = "European age-standardised rate",
+         rate = easr) %>% 
+  select(hb_name, year, measure, rate)  
+
+# put these two datasets together
+compare_rates <- 
+bind_rows(crude_rate, european_standardised_rate)
+
+# drop intermediate tables
+rm(crude_rate, european_standardised_rate)
+
+ compare_rates %>%  
+  ggplot() +
+  aes(x = year, y = rate, group  = measure, colour = measure  ) +
+  geom_line(size  = 2) +
+  theme_minimal() +
+  scale_x_continuous(breaks = (min(cancer_incidence_data$year):max(cancer_incidence_data$year))) +
+  scale_y_continuous(labels = scales::comma) +
+  theme(axis.text.x = element_text(angle=45,hjust=1)) +
+   theme(legend.position="bottom") +
+     scale_colour_manual(
+    values = c(
+      "Crude rate" = "#00A9CE",
+      "European age-standardised rate" = "#003087"
+     )
+    ) +
+  labs(
+    title = "Crude rate vs European age-standardised rate",
+    subtitle = "NHS Borders 1994-2018 \n",
+    x = "\n Year",
+    y = "Number of cases all cancers per 100,000 \n",
+    colour = ""
+  )
+
+```
+
+## <span style="color:#005EB8">Summary of key points</span>
+
+For the NHS Borders region during the period 1994-2018:
+
+  * The population rose from 105,450 in 1994 to 115,270 in 2018
+  
+  * The number of cancer cases recorded has also tended to increase over time - the lowest annual total was 518 in 1994, and the highest was 912 in 2017
+  
+  * The five cancer sites with the most cases were:
+  
+    * Non-melanoma skin cancer
+    
+    * Basal cell carcinoma of the skin
+    
+    * Breast
+    
+    * Trachea, bronchus and lung
+    
+    * Colorectal cancer
+  
+  * The proportion of older people in the population rose, and this trend is projected to continue
+    
+  
+    
+
+ 
+   
+
+
+### <span style="color:#005EB8">References</span>
+
+**Data on cancer instance over time:** https://www.opendata.nhs.scot/dataset/annual-cancer-incidence/resource/3aef16b7-8af6-4ce0-a90b-8a29d6870014
+
+**Population estimate data: ** https://www.nrscotland.gov.uk/statistics-and-data/statistics/statistics-by-theme/population/population-estimates/mid-year-population-estimates/population-estimates-time-series-data
+
+**Scottish Borders population trends:** https://www.nrscotland.gov.uk/files/statistics/council-area-data-sheets/scottish-borders-council-profile.html
+
+**Definitions of crude and age-standardised rates:** https://ecis.jrc.ec.europa.eu/info/glossary.html
+
+**Example of using age-standardised rates:** https://www.nrscotland.gov.uk/files//statistics/age-standardised-death-rates-esp/2017/age-standardised-17-methodology.pdf
+
+**Health Board names reference data:** https://www.opendata.nhs.scot/dataset/9f942fdb-e59e-44f5-b534-d6e17229cc7b/resource/652ff726-e676-4a20-abda-435b98dd7bdc/download/geography_codes_and_labels_hb2014_01042019.csv
+
+
+
+
+
+

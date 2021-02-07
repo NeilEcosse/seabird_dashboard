@@ -1,0 +1,110 @@
+ship_data_fields,x2,x3
+Label,Definition,"Type of variable, unit and coding"
+RECORD,Original record order,Discrete 1 - 12310
+RECORD ID,Record identifier to link ship and bird data from same count or observation,Discrete 1083001 - 85030012
+DATE,Date,Date   dd / mm / yyyy
+TIME,Local time at start of count,Circular Time 24hrs   hh : mm   missing  = blank
+LAT,Decimal latitude,Continuous
+NA,NA,S hemisphere  -90 to 0    N hemisphere  0 to +90
+NA,NA,missing  = blank
+LONG,Decimal longitude,Continuous missing  = blank
+EW,E / W hemisphere,"Nominal E , W   missing  = blank"
+SHPACT,Ship activity,Nominal    missing - blank
+NA,NA,"1 = steaming, sailing"
+NA,NA,2 = dropping trash
+NA,NA,3 = trawling
+NA,NA,4 = oceanography
+NA,NA,5 = potting
+NA,NA,6 = line fishing
+NA,NA,7 = cleaning fish
+NA,NA,8 = stationary
+NA,NA,9 = flying helicopters
+NA,NA,10 = whaling
+SHPSPEED,Ship speed,Continuous Knots   missing  = blank
+SHPDIR,Ship direction,Continuous Degrees  missing  = blank
+CLDCOV,Cloud cover,Ordinal missing  = blank
+NA,NA,0 = clear
+NA,NA,1 = partially cloudy
+NA,NA,2 = overcast
+PRECIP,Precipitations,Nominal   missing = blank
+NA,NA,0 = none
+NA,NA,2 = squalls
+NA,NA,4 = fog
+NA,NA,5 = drizzle
+NA,NA,6 = rain
+NA,NA,8 = showers
+NA,NA,10 = snow showers
+NA,NA,11 = continuous snow
+WNDSPEED,Wind speed,Ordinal Beaufort scale 0 – 12
+NA,NA,0 = calm 0-1 knts
+NA,NA,1 = light air 1-3knts
+NA,NA,2 = light breeze 4-6 knts
+NA,NA,3 = gentle breeze 7-10knts
+NA,NA,4 = moderate breeze 11-16knts
+NA,NA,5 = fresh breeze 17-21knts
+NA,NA,6 = strong breeze 22-27knts
+NA,NA,7 = near gale 28-33knts
+NA,NA,8 = gale 34-40knts
+NA,NA,9 = strong gale 41-47knts
+NA,NA,10 = storm 48-55knts
+NA,NA,11 = violent storm 56-63knts
+NA,NA,12 = hurricane 64+knts
+NA,NA,missing  = blank
+WNDDIR,Wind direction,Circular Degrees   missing  = blank
+AIRTMP,Air temperature,Continuous Degrees Celsius   missing  = blank
+ATPRESS,Atmospheric  sea-level pressure,Continuous Millibars   missing  = blank
+SEASTATE,Sea state,Ordinal missing = blank
+NA,NA,"0 = calm, glassy 0m"
+NA,NA,"1 = calm, rippled 0-0.1m"
+NA,NA,2 = smooth 0.1-0.5m
+NA,NA,3 = slight 0.5-1.2m
+NA,NA,4 = moderate 1.3-2.5m
+NA,NA,5 = rough 2.5-4m
+NA,NA,6 = very rough 4-6m
+SEATMP,Sea surface temperature,Continuous Degrees Celsius   missing  = blank
+SALIN,Sea surface salinity,Continuous Parts per thousand
+NA,NA,missing  = blank
+DEPTH,Sea floor depth,Continuous Meters   missing  = blank
+OBSERVER,Observer,Nominal
+NA,NA,BAIN = A. Baines
+NA,NA,BARK = R. Barker
+NA,NA,BIRD = A.I. Bird
+NA,NA,CART = M.J. Carter
+NA,NA,CHES = N. Cheshire
+NA,NA,CLAR = G.S. Clark
+NA,NA,CLEA = J.D. Cleaver
+NA,NA,COLE = L.R. Cole
+NA,NA,COPS = G.R. Copson
+NA,NA,COWA = A. Cowan
+NA,NA,EADE = D. Eades
+NA,NA,GREE = E.N. Greenwood
+NA,NA,HAND = R.M. Hand
+NA,NA,IMBE = M.J. Imber
+NA,NA,JEFF = D. Jeffcock
+NA,NA,JENK = J. Jenkins
+NA,NA,JOHN = G.W. Johnstone
+NA,NA,KERR = N.R. Kerry
+NA,NA,LEWI = P.P.R. Lewis
+NA,NA,MCQU = P. McQuillan
+NA,NA,MILF = R. Milford
+NA,NA,MILL = D. Milledge
+NA,NA,NESF = P.T. Nesfield
+NA,NA,PARK = L.F. Parkes
+NA,NA,SEPP = R.D. Seppelt
+NA,NA,SMIT = D.G.D. Smith
+NA,NA,THOM = K.J. Thomas
+BIRDCOUNT,Census method,Nominal
+NA,NA,10 MIN = full 10min count  PART = partial 10min count or casual observation
+MONTH,Month (derived),Discrete 1-12
+SSEASON,Southern hemisphere season (derived),Nominal / Circular
+NA,NA,Summer = Dec-Feb   Autumn = Mar-May
+NA,NA,Winter = Jun-Aug   Spring = Sep-Nov
+LONG360,Longitude east 0-360 degrees (derived),Continuous Degree 0-360
+NA,NA,"E hemisphere 0 - 180, W hemisphere 180 – 360"
+NA,NA,"(0 = Greenwich meridian, 180 degrees =180, 179W = 181, 1W = 359)   missing  = blank"
+LATCELL,One degree latitude cell centre (derived),Discrete Degree
+NA,NA,"S hemisphere -180 - 0, N hemisphere 0 - +180"
+NA,NA,missing  = blank
+LONGCELL 360,One degree longitude 0-360 east cell centre (derived),Discrete Degree 0-360 East
+NA,NA,"E hemisphere 0 - 180, W hemisphere 180 – 360"
+NA,NA,"(0 = Greenwich meridian, 180 degrees =180, 179W = 181, 1W = 359)   missing  = blank"

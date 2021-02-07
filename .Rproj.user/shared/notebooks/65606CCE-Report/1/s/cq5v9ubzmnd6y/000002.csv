@@ -1,0 +1,9 @@
+"0","```r
+cancer_incidence_data <- 
+ read_csv(here(\"data_clean/cancer_incidence_data.csv\"))
+
+population_estimates <- 
+ read_csv(here(\"data_clean/population_estimates.csv\"))
+
+data_dictionary <- read_csv(here(\"data_raw/data_dictionary.csv\")) 
+```"

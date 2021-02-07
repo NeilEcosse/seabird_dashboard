@@ -1,0 +1,72 @@
+bird_data_fields,x2,x3
+Label,Definition,"Type of variable, unit and coding"
+NA,NA,NA
+RECORD,Original record order,Discrete 1 - 49019
+RECORD ID,Record identifier to link ship and bird data from a bird count or observation,Discrete 1083001 - 85030012
+SPECIES COMMON NAME,"Species (or species grouping if unable to differentiate) common name, subdivided by age, sex and/or plumage phase. Names based on NZ Checklist.",Missing = [NO BIRDS RECORDED]
+SPECIES SCIENTIFIC NAME,"Species (or species aggregates if unable to differentiate) scientific name, subdivided by age, sex and/or plumage phase. Names based on NZ Checklist.",NA
+SPECIES ABBREVIATION,"Abbreviated names (mostly first three letters of genus then species) subdivided by age, sex and/or plumage phase.",NA
+AGE,Age,Nominal missing = blank
+NA,NA,AD= adult
+NA,NA,SUBAD = subadult
+NA,NA,IMM= immature
+NA,NA,JUV = juvenile
+WANPLUM,Wandering albatross plumage phase (John Jenkins counts),Ordinal missing = blank
+NA,NA,1 = all brown
+NA,NA,2 = (brown plumage) breaking
+NA,NA,3 = white patch on wing
+NA,NA,4 = wing patch breaking
+NA,NA,5 = white
+PLPHASE,Plumage phase,Ordinal missing = blank
+NA,NA,DRK = dark
+NA,NA,INT = Intermediate
+NA,NA,LGHT = light
+NA,NA,WHITE = white
+SEX,Sex,Nominal missing = blank
+NA,NA,F = Female   M = male
+COUNT,Abundance,Discrete missing = blank
+NA,NA,"Total no of individuals counted in 10 min (1 – 50,000; 99999 = over 100,000)"
+NFEED,Feeding numbers (unspecified whether around ship or naturally),Discrete 0-40000
+NA,NA,"99999 = over 100,000"
+NA,NA,missing = blank
+OCFEED,Feeding occurrence (unspecified whether around ship or naturally),Nominal Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+NSOW,Sitting on water numbers,Discrete 0-20 000
+NA,NA,missing = blank
+OCSOW,Sitting on water occurrence,Nominal Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+NSOICE,Sitting on ice numbers,Discrete 0-300
+NA,NA,missing = blank
+OCSOICE,Sitting on ice occurrence,Nominal Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+OCSOSHP,Sitting on ship occurrence,Nominal Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+OCINHD,In hand occurrence,Nominal Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+NFLYP,Flying past numbers,Continuous 0-40 000
+NA,NA,"99999 = over 100,000"
+NA,NA,missing = blank
+OCFLYP,Flying past occurrence,Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+NACC,Accompanying numbers,Continuous 0-1000
+NA,NA,missing = blank
+OCACC,Accompanying occurrence,Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+NFOLL,Ship following in wake numbers,Continuous 0-50
+NA,NA,missing = blank
+OCFOLL,Ship following in wake occurrence,Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+OCMOULT,Occurrence of moult,Y = yes
+NA,NA,N = no
+NA,NA,U = unknown
+OCNATFED,Naturally feeding occurrence (not feeding around or behind ship),Y = yes
+NA,NA,N = no
+NA,NA,U = unknown

@@ -1,0 +1,23 @@
+"0","```r
+cancer_incidence_data %>% 
+  filter(hb_name == \"NHS Borders\") %>% 
+  filter(cancer_site != \"All cancer types\") %>% 
+  filter(sex == \"All\") %>%
+  group_by(hb_name, cancer_site) %>% 
+  summarise(total_incidences_all_ages = sum(incidences_all_ages)) %>% 
+  filter(total_incidences_all_ages >=500) %>% 
+  ggplot() +
+  aes(x = reorder(cancer_site, -total_incidences_all_ages), y = total_incidences_all_ages) +
+  # NHS colours: https://www.england.nhs.uk/nhsidentity/identity-guidelines/colours/
+  geom_col(fill = \"#005EB8\") +
+  theme_minimal() +
+  scale_y_continuous(labels = scales::comma) +
+  theme(axis.text.x = element_text(angle=45,hjust=1)) +
+    labs(
+    title = \"Number of cases by cancer site\",
+    subtitle = \"NHS Borders 1994-2018 \n\",
+    x = \"\n Cancer site\",
+    y = \"Number of cases \n\",
+    colour = \"\"
+  )
+```"

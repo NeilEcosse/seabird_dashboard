@@ -1,0 +1,8 @@
+"0","data_by_year_and_ship_activity %>% "
+"0","  filter(!is.na(year)) %>% "
+"0","  group_by(year) %>% "
+"0","  summarise(number_of_individuals = sum(count)) %>% "
+"0","ggplot() +"
+"0","  aes(x = year, y = number_of_individuals) +"
+"0","  geom_col(fill = ""steel blue"") +"
+"0","  scale_y_continuous(labels = scales::comma)"
