@@ -126,7 +126,7 @@ server <- function(input, output) {
   
   # Create colour scheme for markers based on number of individuals
   observation_locations <- observation_locations %>% 
-    mutate(observations_group = cut(number_of_individuals, breaks = c(0, 10, 100, 500, 1000, Inf),
+    mutate(observations_group = cut(number_of_individuals, breaks = c(0, 10, 100, 500, 1000, Inf),right = FALSE, 
                                     labels = c("orange", "light yellow","darkred", "red", "purple"),
                                     include.lowest = TRUE)) 
   
