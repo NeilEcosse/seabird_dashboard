@@ -1,7 +1,7 @@
 # Shiny dashboard app using leaflet map and ggplot chart
 
 
-# Live version available here: https://neilecosse.shinyapps.io/seabird_data/
+## Live version available here: https://neilecosse.shinyapps.io/seabird_data/
 
 
 ## Overview
