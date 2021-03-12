@@ -1,0 +1,10 @@
+name: seabird_data
+title:
+username:
+account: neilecosse
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 3767661
+bundleId: 4326026
+url: https://neilecosse.shinyapps.io/seabird_data/
+when: 1615379438.27367

@@ -5,6 +5,7 @@ library(here)
 library(leaflet)
 library(shiny)
 library(shinydashboard)
+library(rsconnect)
 
 bird_data_by_record_id_clean <-
   read_csv(here("data_clean/bird_data_by_record_id_clean.csv"))

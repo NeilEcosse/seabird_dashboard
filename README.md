@@ -10,29 +10,13 @@ This project uses seabird observation in a dashboard which displays the informat
 
 
 
-## Process Methodology
-
-I imported the raw Excel files into an R Studio project, and created an R script to clean them.
-
-The cleaning file is saved in the **scripts** folder:
-
-<img src = "images/data_cleaning.png">
-
-
-After investigating the data, I coded a Shiny dashboard which allows you to select a species and date range to be shown on the map and graph.
-
-
-
-## Packages Used
-
-The main packages used for cleaning and analysis were **tidyverse**, **janitor** and **assertr**. I then created the app using **shinydashboard**, along with **leaflet** for the map and  **ggplot** for the graph.
 
 
 ## App features 
 
 ### Sidebar - menu and inputs
 
-Here you can choose whether you want to view the map or the graph, and select the species and date range yopu want them to show.
+Here you can choose whether you want to view the map or the graph, and select the species and date range you want them to show.
 
 
 <img src = "images/inputs.png">
@@ -53,6 +37,23 @@ The map shows the total number of individuals observed by year for the selected 
 <img src = "images/graph.png">
 
 
+
+## Process Methodology
+
+I imported the raw Excel files into an R Studio project, and created an R script to clean them.
+
+The cleaning file is saved in the **scripts** folder:
+
+<img src = "images/data_cleaning.png">
+
+
+After investigating the data, I coded a Shiny dashboard which allows you to select a species and date range to be shown on the map and graph.
+
+
+
+## Packages Used
+
+The main packages used for cleaning and analysis were **tidyverse**, **janitor** and **assertr**. I then created the app using **shinydashboard**, along with **leaflet** for the map and  **ggplot** for the graph.
 
 
 
